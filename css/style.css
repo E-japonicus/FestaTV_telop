@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+/*背景の設定*/
+body {
+    overflow: hidden;
+    margin: 0px;
+    /*背景素材のpath*/
+    background-image: url("../images/background.jpg");
+    background-size :contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    font:"font_1_honokamarugo_1.1";
+    word-break:break-all;
+}
+
+.ONAIR {
+  /*大きさの設定*/
+  width: 220px;
+  height: 75px;
+  /*場所の設定　左上を起点とする*/
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+.tweet_box {
+  /*大きさの設定*/
+  width: 265px;
+  height: 700px;
+  /*場所の設定　左上を起点とする*/
+  position: absolute;
+  top: 130px;
+  left: 30px;
+}
+
+.ipu_kun_tweet {
+  /*大きさの設定*/
+  width: 210px;
+  height: 90px;
+  /*場所の設定　左上を起点とする*/
+  position: absolute;
+  top: 130px;
+  left: 60px;
+}
+
+.Twitter {
+  /*場所の設定　左上を起点とする*/
+  position: absolute;
+  top: 210px;
+  left: 0px;
+}
+
+.clocklink {
+  /*場所の設定　左上を起点とする*/
+  position: absolute !important;
+  top: 850px !important;
+  left: 40px !important;
+}
+
+.msgBox{
+  /*大きさの設定*/
+  width :1340px;
+  height :110px;
+  /*場所の設定　左上を起点とする*/
+  position: absolute;
+  top: 840px;
+  left: 300px;
+  /*背景色*/
+  background-color :#FFFFCE;
+}
+
+#msgConf{
+  /*文字の設定　大きさ，色，*/
+  font-size: 37px !important;
+  color :black;
+  /*文字の表示される範囲*/
+  width: 1330px;
+  height: 100px;
+  /*場所の設定　左上を起点とする*/
+  position: absolute;
+  left: 5px;
+}
