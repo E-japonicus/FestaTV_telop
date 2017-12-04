@@ -4,10 +4,14 @@ ini_set('display_errors', "On");
 // 文字コードの表示
 mb_internal_encoding("UTF-8");
 
+//表示できる文字列
+$maxstr = 36;
+//ファイルパス
+$filepath = './telop.txt';
+
 // 文字列のチェックを行う関数
 function check_msg($str){
-  // 表示できる最大の文字数
-  $maxstr = 36;
+  global $maxstr;
 
   // 文字列の長さ
   $strlen = mb_strlen($str, "UTF-8");
@@ -74,6 +78,7 @@ function check_msg($str){
 
 // 文字列の書き込みを行う関数
 function insert_msg($str){
+  global $filepath;
   // 文字列のチェックを行う
   $str = check_msg($str);
 
@@ -82,7 +87,7 @@ function insert_msg($str){
     // 文字列にtxt改行タグを挿入
     $str = $str."\n";
     // telop.txtに文字列を書き込む
-    file_put_contents('./telop.txt', $str, FILE_APPEND | LOCK_EX);
+    file_put_contents($filepath, $str, FILE_APPEND | LOCK_EX);
     return true;
   } else {
     // 文字列にエラーがあった場合
@@ -92,12 +97,13 @@ function insert_msg($str){
 
 // 文字列の削除を行う関数
 function delete_msg($id){
+  global $filepath;
   // telop.txtファイル全体を読み込んで配列に格納する
-  $handle  = file('./telop.txt');
+  $handle  = file($filepath);
   // postされた行数を削除する
   array_splice($handle, $id-1, 1);
   // telop.txtに削除された文字列以外を書き込む
-  file_put_contents('./telop.txt', $handle);
+  file_put_contents($filepath, $handle);
 
   return true;
 }
