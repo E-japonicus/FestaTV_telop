@@ -3,12 +3,11 @@
 ini_set('display_errors', "On");
 // 文字コードの表示
 mb_internal_encoding("UTF-8");
+// edit.phpを読み込む
+require("./edit.php");
 
 // POSTされた時
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  // edit.phpを読み込む
-  require("./edit.php");
-
   // txtが送信された場合
   if (!empty($_POST['txt'])) {
     // 文字列を書き込む関数の呼び出し
@@ -72,10 +71,10 @@ $handle = file('./telop.txt');
       </div>
       <div class="panel-body lead well-sm">
         <ul>
-          <li>文章の長さは最大72文字です．また36文字目で自動で改行されます．</li>
+          <li>文章の長さは最大<?php echo $maxstr*2 ?>文字です．また<?php echo $maxstr ?>文字目で自動で改行されます．</li>
           <li>任意の場所で改行したい場合は，改行したい位置に&lt;br&gt;と書き込んでください．(改行は1回まで)</li>
-          <li>改行を行う場合は，1行目，2行目ともに36文字以下になるようにしてください．</li>
-          <li>改行タグ(&lt;br&gt;)は文字数としてカウントされません．(&lt;br&gt;を含めないで72文字まで記載可能)</li>
+          <li>改行を行う場合は，1行目，2行目ともに<?php echo $maxstr ?>文字以下になるようにしてください．</li>
+          <li>改行タグ(&lt;br&gt;)は文字数としてカウントされません．(&lt;br&gt;を含めないで<?php echo $maxstr*2 ?>文字まで記載可能)</li>
           <li>テロップを削除したい場合は削除したい文章の削除ボタンを押してください．</li>
         </ul>
       </div>
@@ -89,7 +88,10 @@ $handle = file('./telop.txt');
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($handle as $key => $value) : ?>
+        <?php foreach ($handle as $key => $value) :
+          // XSS対策 (<br>タグは有効にする)
+          $value = str_replace('&lt;br&gt;', '<br>', htmlspecialchars($value ,ENT_QUOTES));
+          ?>
           <tr class="row lead">
             <td class="col-lg-11">
               <?php echo $value ?>

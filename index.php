@@ -89,7 +89,10 @@ $handle_reverse = array_reverse($handle);
           <?php
             // 配列をループして表示する
             foreach ($handle_reverse as $value){
-              echo "<div>". $value. "</div>";
+              // XSS対策 (<br>タグは有効にする)
+              $value = str_replace('&lt;br&gt;', '<br>', htmlspecialchars($value ,ENT_QUOTES));
+              // $valueの値をdivで囲んで出力
+              echo "<div>". $value . "</div>";
             }
           ?>
         </div>
